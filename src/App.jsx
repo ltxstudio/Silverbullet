@@ -3,9 +3,10 @@ import Chatbot from './Chatbot';
 
 const App = () => {
   return (
-    <div className="App">
-      <h1>AI Chatbot</h1>
-      <Chatbot />
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full max-w-xl p-6">
+        <Chatbot />
+      </div>
     </div>
   );
 };
