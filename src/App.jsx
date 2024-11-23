@@ -1,100 +1,68 @@
 import { useState } from 'react';
-import axios from 'axios';
+import { generateResponse } from './api';
+import { FaPaperPlane } from 'react-icons/fa'; // For the send icon
+import { motion } from 'framer-motion'; // For animations
 
 function App() {
-  const [message, setMessage] = useState('');
-  const [chat, setChat] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [userMessage, setUserMessage] = useState('');
+  const [chatHistory, setChatHistory] = useState([]);
 
-  // Handle message send
-  const sendMessage = async (e) => {
-    e.preventDefault();
-    if (!message.trim()) return; // Don't send empty messages
-
-    // Add user message to chat
-    setChat((prev) => [
-      ...prev,
-      { from: 'user', text: message },
-    ]);
-
-    setLoading(true);
+  const handleSendMessage = async () => {
+    if (!userMessage.trim()) return; // Don't send empty messages
+    setChatHistory([...chatHistory, { user: true, text: userMessage }]);
+    setUserMessage('');
 
     try {
-      // API call to Gemini (using the provided curl command structure)
-      const response = await axios.post(
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyBTqU2RlwJjT4dm3I-hRlTsOVedxR4wINU',
-        {
-          contents: [
-            {
-              parts: [
-                {
-                  text: message,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      const aiResponse = response.data.contents[0].parts[0].text;
-
-      // Add AI response to chat
-      setChat((prev) => [
-        ...prev,
-        { from: 'ai', text: aiResponse },
-      ]);
+      const response = await generateResponse(userMessage);
+      const botReply = response?.data?.responseText || "Sorry, I couldn't get a response.";
+      setChatHistory([...chatHistory, { user: true, text: userMessage }, { user: false, text: botReply }]);
     } catch (error) {
-      console.error('Error:', error);
-      setChat((prev) => [
-        ...prev,
-        { from: 'ai', text: 'Sorry, there was an error.' },
-      ]);
-    } finally {
-      setMessage('');
-      setLoading(false);
+      setChatHistory([...chatHistory, { user: true, text: userMessage }, { user: false, text: "Sorry, there was an error." }]);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100 py-4 px-6">
-      <h1 className="text-2xl font-semibold mb-4">AI Chat</h1>
-      <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-4 mb-4 overflow-hidden">
-        <div className="chat-window space-y-4 max-h-80 overflow-y-auto mb-4">
-          {chat.map((msg, index) => (
-            <div
-              key={index}
-              className={`message p-2 rounded-lg ${msg.from === 'user' ? 'bg-blue-500 text-white self-end' : 'bg-gray-200 text-gray-800'}`}
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      <motion.div 
+        className="bg-white rounded-lg shadow-xl w-full sm:w-96 lg:w-1/2 xl:w-1/3"
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="p-6 h-96 flex flex-col justify-between">
+          <div className="space-y-4 overflow-y-auto h-full">
+            {chatHistory.map((msg, index) => (
+              <motion.div
+                key={index}
+                className={`p-3 rounded-lg ${msg.user ? 'bg-blue-100 text-right' : 'bg-gray-200 text-left'}`}
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <p>{msg.text}</p>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="mt-4 flex items-center space-x-2">
+            <input
+              type="text"
+              value={userMessage}
+              onChange={(e) => setUserMessage(e.target.value)}
+              placeholder="Type a message..."
+              className="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <motion.button
+              onClick={handleSendMessage}
+              className="p-3 bg-blue-500 text-white rounded-lg disabled:opacity-50"
+              disabled={!userMessage.trim()}
+              whileTap={{ scale: 0.9 }}
             >
-              <p>{msg.text}</p>
-            </div>
-          ))}
-          {loading && (
-            <div className="message p-2 rounded-lg bg-gray-200 text-gray-800">
-              <p>Loading...</p>
-            </div>
-          )}
+              <FaPaperPlane />
+            </motion.button>
+          </div>
         </div>
-      </div>
-      <form onSubmit={sendMessage} className="flex w-full max-w-2xl">
-        <input
-          type="text"
-          className="w-full p-3 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Type a message..."
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="p-3 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Send
-        </button>
-      </form>
+      </motion.div>
     </div>
   );
 }
