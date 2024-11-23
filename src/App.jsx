@@ -53,11 +53,31 @@ const App = () => {
         throw new Error("Invalid response format from Cloudflare API");
       }
     } catch (error) {
+      // More detailed error handling
       console.error("Error communicating with the Cloudflare AI API:", error);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { role: "assistant", content: `Error: ${error.message || "Something went wrong."}` },
-      ]);
+
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            role: "assistant",
+            content: `Error: Server responded with status ${error.response.status}. ${error.response.data?.message || error.message}`,
+          },
+        ]);
+      } else if (error.request) {
+        // The request was made but no response was received
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { role: "assistant", content: "Error: No response received from the server." },
+        ]);
+      } else {
+        // Something went wrong in setting up the request
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { role: "assistant", content: `Error: ${error.message || "Something went wrong."}` },
+        ]);
+      }
     } finally {
       setLoading(false);
     }
