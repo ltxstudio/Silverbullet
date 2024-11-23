@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { FaPaperPlane } from "react-icons/fa";
+import { FaSpinner } from "react-icons/fa"; // For loading spinner
 
 const App = () => {
   const [messages, setMessages] = useState([]);
   const [userMessage, setUserMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Update API URL to Cloudflare's Llama-3-8B-Instruct
   const apiUrl =
     "https://api.cloudflare.com/client/v4/accounts/e0c371248ae87e4e5b90c02c7fb9be9e/ai/run/@cf/meta/llama-3-8b-instruct";
 
@@ -42,16 +42,21 @@ const App = () => {
         }
       );
 
-      const aiResponse = response.data.result.message.content;
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { role: "assistant", content: aiResponse },
-      ]);
+      // Check if the response is valid
+      if (response.data && response.data.result && response.data.result.message) {
+        const aiResponse = response.data.result.message.content;
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { role: "assistant", content: aiResponse },
+        ]);
+      } else {
+        throw new Error("Invalid response format from Cloudflare API");
+      }
     } catch (error) {
       console.error("Error communicating with the Cloudflare AI API:", error);
       setMessages((prevMessages) => [
         ...prevMessages,
-        { role: "assistant", content: "Sorry, something went wrong. Please try again." },
+        { role: "assistant", content: `Error: ${error.message || "Something went wrong."}` },
       ]);
     } finally {
       setLoading(false);
@@ -59,24 +64,26 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-lg sm:max-w-xl bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="p-4 flex flex-col h-[75vh] overflow-hidden">
-          <div className="flex-grow overflow-auto space-y-4">
+    <div className="flex justify-center items-center min-h-screen bg-gray-200 p-4">
+      <div className="w-full max-w-3xl bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="p-6 flex flex-col h-[75vh] overflow-hidden">
+          <div className="flex-grow overflow-auto space-y-4 px-2">
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`p-3 rounded-lg ${
+                className={`p-4 rounded-lg max-w-[80%] ${
                   msg.role === "user"
-                    ? "bg-blue-500 text-white self-end"
-                    : "bg-gray-200 text-gray-800 self-start"
+                    ? "bg-blue-500 text-white self-end rounded-br-none"
+                    : "bg-gray-300 text-gray-800 self-start rounded-bl-none"
                 }`}
               >
                 <p>{msg.content}</p>
               </div>
             ))}
           </div>
-          <div className="flex items-center mt-4 border-t pt-4">
+
+          {/* Input and Send Button Section */}
+          <div className="flex items-center mt-4 border-t pt-4 space-x-4">
             <input
               type="text"
               value={userMessage}
@@ -88,9 +95,13 @@ const App = () => {
             <button
               onClick={handleSendMessage}
               disabled={loading}
-              className="ml-4 p-3 rounded-full bg-blue-500 text-white disabled:bg-blue-300"
+              className="p-3 rounded-full bg-blue-500 text-white disabled:bg-blue-300"
             >
-              <FaPaperPlane />
+              {loading ? (
+                <FaSpinner className="animate-spin" />
+              ) : (
+                <FaPaperPlane />
+              )}
             </button>
           </div>
         </div>
