@@ -1,9 +1,9 @@
 import React from 'react';
 import FeatureCard from '../components/FeatureCard';
 import DownloadButton from '../components/DownloadButton';
-import { FaCode, FaCloudDownloadAlt, FaSync, FaUserFriends, FaLock, FaStar, FaCogs } from 'react-icons/fa';
+import { FaCode, FaCloudDownloadAlt, FaSync, FaUserFriends, FaLock, FaStar, FaCogs, FaShoppingCart } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { Transition, Disclosure } from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 
 const Home = () => (
   <div className="container mx-auto px-6 py-12 space-y-12">
@@ -104,18 +104,14 @@ const Home = () => (
           </div>
         </div>
 
-        {/* Enterprise Plan */}
-        <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center transition-transform hover:scale-105 ease-in-out duration-300">
-          <h3 className="text-xl font-bold mb-2 text-blue-600">Enterprise Plan</h3>
-          <p className="text-gray-700 mb-4">Custom solutions and dedicated support for teams.</p>
-          <p className="font-bold text-lg">Contact us</p>
-          <div className="mt-4">
-            <ul className="space-y-2 text-left text-gray-700">
-              <li className="flex items-center"><FaCloudDownloadAlt className="mr-2" /> Team synchronization</li>
-              <li className="flex items-center"><FaCogs className="mr-2" /> Tailored solutions</li>
-              <li className="flex items-center"><FaLock className="mr-2" /> Enhanced security</li>
-            </ul>
-          </div>
+        {/* Buy Now Button */}
+        <div className="bg-green-100 p-6 rounded-lg shadow-md text-center transition-transform hover:scale-105 ease-in-out duration-300 col-span-1 sm:col-span-2 md:col-span-3">
+          <h3 className="text-xl font-bold mb-2 text-green-600">Buy Now</h3>
+          <p className="text-gray-700 mb-4">Get full access to all features with the Pro plan.</p>
+          <button className="bg-green-600 text-white py-2 px-6 rounded-lg flex items-center justify-center mx-auto space-x-2 hover:bg-green-700 focus:outline-none transition-all duration-300">
+            <FaShoppingCart />
+            <span>Buy Now</span>
+          </button>
         </div>
       </div>
     </section>
@@ -150,7 +146,7 @@ const Home = () => (
                 </span>
               </Disclosure.Button>
               <Disclosure.Panel className="bg-white p-4 rounded-lg shadow-md text-gray-700">
-                Yes! Silverbullet offers a free plan with basic features. You can also upgrade to the Pro or Enterprise plans for additional features.
+                Yes! Silverbullet offers a free plan with basic features. You can also upgrade to the Pro plan for additional features.
               </Disclosure.Panel>
             </>
           )}
