@@ -72,7 +72,7 @@ const Header = () => {
         
         {/* GitHub Button */}
         <a
-          href="https://github.com"
+          href="https://github.com/ltxstudio/Silverbullet"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center space-x-2 bg-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105"
@@ -125,7 +125,7 @@ const Header = () => {
 
           {/* GitHub Button for Mobile */}
           <a
-            href="https://github.com"
+            href="https://github.com/ltxstudio/Silverbullet"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-2 bg-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105"
