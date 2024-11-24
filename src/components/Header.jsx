@@ -4,8 +4,10 @@ import { useState } from 'react';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
     <header className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white shadow-lg">
@@ -67,6 +69,39 @@ const Header = () => {
                 Features
               </Link>
             </li>
+            {/* Dropdown for larger menu items */}
+            <li className="relative">
+              <button
+                onClick={toggleDropdown}
+                className="text-lg font-semibold hover:text-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
+                aria-haspopup="true"
+                aria-expanded={isDropdownOpen ? 'true' : 'false'}
+              >
+                More
+              </button>
+              {isDropdownOpen && (
+                <ul className="absolute left-0 mt-2 bg-white text-black shadow-lg rounded-md space-y-2 py-2 w-40">
+                  <li>
+                    <Link
+                      to="/contact"
+                      className="block px-4 py-2 hover:text-blue-600 transition duration-300 ease-in-out"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Contact
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/blog"
+                      className="block px-4 py-2 hover:text-blue-600 transition duration-300 ease-in-out"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Blog
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
           </ul>
         </nav>
         
@@ -119,6 +154,24 @@ const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Features
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact"
+                className="text-lg font-semibold hover:text-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/blog"
+                className="text-lg font-semibold hover:text-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Blog
               </Link>
             </li>
           </ul>
