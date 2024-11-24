@@ -6,11 +6,13 @@ const FeatureCard = ({ title, description, icon: Icon = FaCogs }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
-      className="bg-gray-100 p-6 rounded-lg shadow-lg text-center"
+      className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 max-w-sm w-full"
     >
-      <Icon className="text-primary text-4xl mb-4" />
-      <h3 className="text-xl font-bold">{title}</h3>
-      <p className="text-gray-600 mt-2">{description}</p>
+      <div className="flex justify-center items-center mb-4">
+        <Icon className="text-blue-500 text-4xl md:text-5xl" />
+      </div>
+      <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
+      <p className="text-gray-600 text-base md:text-lg">{description}</p>
     </motion.div>
   );
 };
