@@ -8,9 +8,11 @@ const Header = () => {
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   return (
-    <header className="bg-gray-800 text-white shadow-lg">
+    <header className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white shadow-lg">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
-        <h1 className="text-xl font-bold">Silverbullet</h1>
+        {/* Logo */}
+        <h1 className="text-2xl font-bold tracking-wide text-white">Silverbullet</h1>
+        
         {/* Mobile Menu Button */}
         <button
           className="md:hidden text-white"
@@ -32,13 +34,14 @@ const Header = () => {
             ></path>
           </svg>
         </button>
+        
         {/* Navigation Menu */}
         <nav className={`md:flex ${isMobileMenuOpen ? 'block' : 'hidden'} space-x-4`}>
           <ul className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
             <li>
               <Link
                 to="/"
-                className="hover:text-blue-400 transition-all duration-200"
+                className="text-lg font-semibold hover:text-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
@@ -47,7 +50,7 @@ const Header = () => {
             <li>
               <Link
                 to="/about"
-                className="hover:text-blue-400 transition-all duration-200"
+                className="text-lg font-semibold hover:text-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 About
@@ -56,7 +59,7 @@ const Header = () => {
             <li>
               <Link
                 to="/features"
-                className="hover:text-blue-400 transition-all duration-200"
+                className="text-lg font-semibold hover:text-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Features
@@ -64,17 +67,19 @@ const Header = () => {
             </li>
           </ul>
         </nav>
+        
         {/* GitHub Button */}
         <a
           href="https://github.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center space-x-2 bg-blue-500 px-4 py-2 rounded shadow hover:bg-blue-600 transition-all duration-200"
+          className="flex items-center space-x-2 bg-indigo-600 px-4 py-2 rounded-md shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105"
         >
           <FaGithub />
-          <span>GitHub</span>
+          <span className="font-semibold">GitHub</span>
         </a>
       </div>
+
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div
