@@ -3,7 +3,7 @@ import FeatureCard from '../components/FeatureCard';
 import DownloadButton from '../components/DownloadButton';
 import { FaCode, FaCloudDownloadAlt, FaSync, FaUserFriends, FaLock, FaStar, FaCogs } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { Transition } from '@headlessui/react';
+import { Transition, Disclosure } from '@headlessui/react';
 
 const Home = () => (
   <div className="container mx-auto px-6 py-12 space-y-12">
@@ -77,7 +77,7 @@ const Home = () => (
       <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Pricing</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {/* Free Plan */}
-        <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center">
+        <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center transition-transform hover:scale-105 ease-in-out duration-300">
           <h3 className="text-xl font-bold mb-2 text-blue-600">Free Plan</h3>
           <p className="text-gray-700 mb-4">Basic features for individuals and hobbyists.</p>
           <p className="font-bold text-lg">$0/month</p>
@@ -91,7 +91,7 @@ const Home = () => (
         </div>
 
         {/* Pro Plan */}
-        <div className="bg-blue-100 p-6 rounded-lg shadow-md text-center">
+        <div className="bg-blue-100 p-6 rounded-lg shadow-md text-center transition-transform hover:scale-105 ease-in-out duration-300">
           <h3 className="text-xl font-bold mb-2 text-blue-600">Pro Plan</h3>
           <p className="text-gray-700 mb-4">Advanced tools and priority support for professionals.</p>
           <p className="font-bold text-lg">$19/month</p>
@@ -105,7 +105,7 @@ const Home = () => (
         </div>
 
         {/* Enterprise Plan */}
-        <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center">
+        <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center transition-transform hover:scale-105 ease-in-out duration-300">
           <h3 className="text-xl font-bold mb-2 text-blue-600">Enterprise Plan</h3>
           <p className="text-gray-700 mb-4">Custom solutions and dedicated support for teams.</p>
           <p className="font-bold text-lg">Contact us</p>
@@ -124,18 +124,37 @@ const Home = () => (
     <section className="bg-gray-50 py-12">
       <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Frequently Asked Questions</h2>
       <div className="space-y-4">
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <h4 className="font-bold mb-2 text-gray-800">What is Silverbullet?</h4>
-          <p className="text-gray-700">
-            Silverbullet is a desktop application that streamlines GitHub repository management. It integrates with your GitHub account to automate syncing and provide a seamless workflow.
-          </p>
-        </div>
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <h4 className="font-bold mb-2 text-gray-800">Is it free to use?</h4>
-          <p className="text-gray-700">
-            Yes! Silverbullet offers a free plan with basic features. You can also upgrade to the Pro or Enterprise plans for additional features.
-          </p>
-        </div>
+        <Disclosure>
+          {({ open }) => (
+            <>
+              <Disclosure.Button className="bg-white p-4 rounded-lg shadow-md w-full text-left text-gray-800 font-bold focus:outline-none">
+                <span>What is Silverbullet?</span>
+                <span className={`ml-2 transition-transform ${open ? 'rotate-180' : ''}`}>
+                  ▼
+                </span>
+              </Disclosure.Button>
+              <Disclosure.Panel className="bg-white p-4 rounded-lg shadow-md text-gray-700">
+                Silverbullet is a desktop application that streamlines GitHub repository management. It integrates with your GitHub account to automate syncing and provide a seamless workflow.
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
+
+        <Disclosure>
+          {({ open }) => (
+            <>
+              <Disclosure.Button className="bg-white p-4 rounded-lg shadow-md w-full text-left text-gray-800 font-bold focus:outline-none">
+                <span>Is it free to use?</span>
+                <span className={`ml-2 transition-transform ${open ? 'rotate-180' : ''}`}>
+                  ▼
+                </span>
+              </Disclosure.Button>
+              <Disclosure.Panel className="bg-white p-4 rounded-lg shadow-md text-gray-700">
+                Yes! Silverbullet offers a free plan with basic features. You can also upgrade to the Pro or Enterprise plans for additional features.
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
       </div>
     </section>
   </div>
