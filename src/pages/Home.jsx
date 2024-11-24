@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import FeatureCard from '../components/FeatureCard';
 import DownloadButton from '../components/DownloadButton';
 import { FaCode, FaCloudDownloadAlt, FaSync, FaUserFriends, FaLock, FaStar, FaCogs, FaShoppingCart, FaSearch, FaHammer } from 'react-icons/fa';
@@ -6,63 +7,82 @@ import { motion } from 'framer-motion';
 import { Disclosure } from '@headlessui/react';
 
 const Home = () => (
-  <div className="container mx-auto px-6 py-12 space-y-12">
-    {/* Hero Section */}
-    <section className="text-center mb-12 bg-gradient-to-r from-green-100 to-teal-200 rounded-lg p-8 shadow-lg">
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="space-y-6"
-      >
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
-          Openbullet Web Testing Suite
-        </h1>
-        <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-          A powerful tool for web scraping, pentesting, and automated testing. Perform requests towards web apps, parse data, and more with Openbullet.
-        </p>
-        <DownloadButton />
-      </motion.div>
-    </section>
+  <>
+    {/* SEO Meta Tags */}
+    <Helmet>
+      <title>Openbullet Web Testing Suite | Features, Pricing, and More</title>
+      <meta name="description" content="Discover Openbullet, a powerful tool for web scraping, pentesting, and automated testing. Explore features, pricing, and testimonials to see how Openbullet can help you." />
+      <meta name="keywords" content="Openbullet, web testing, web scraping, pentesting, automation, Selenium, data parsing, security testing, testing tools" />
+      <meta name="author" content="Openbullet Team" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta property="og:title" content="Openbullet Web Testing Suite" />
+      <meta property="og:description" content="Explore Openbullet, a comprehensive web testing suite for professionals and hobbyists alike." />
+      <meta property="og:image" content="https://yourwebsite.com/openbullet-thumbnail.png" />
+      <meta property="og:url" content="https://yourwebsite.com/" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Openbullet Web Testing Suite" />
+      <meta name="twitter:description" content="Automate your web scraping, pentesting, and testing tasks with Openbullet. Learn more about our features and pricing." />
+      <meta name="twitter:image" content="https://yourwebsite.com/openbullet-thumbnail.png" />
+      <link rel="canonical" href="https://yourwebsite.com/" />
+    </Helmet>
 
-    {/* Features Section */}
-    <section>
-      <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Features</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <FeatureCard
-          title="Automated Requests"
-          description="Perform automated requests with ease for web scraping or pentesting."
-          icon={FaSearch}
-        />
-        <FeatureCard
-          title="Unit Testing with Selenium"
-          description="Run unit tests and web automation scripts seamlessly with Selenium support."
-          icon={FaHammer}
-        />
-        <FeatureCard
-          title="Data Parsing"
-          description="Efficiently scrape and parse data from web applications."
-          icon={FaCode}
-        />
-        <FeatureCard
-          title="Security Testing"
-          description="Test your web application's security with a range of pentesting tools."
-          icon={FaLock}
-        />
-        <FeatureCard
-          title="One-Click Sync"
-          description="Sync your data and results across devices with just a click."
-          icon={FaSync}
-        />
-        <FeatureCard
-          title="Customizable Workflows"
-          description="Tailor your testing processes and workflows to suit your needs."
-          icon={FaCogs}
-        />
-      </div>
-    </section>
+    <div className="container mx-auto px-6 py-12 space-y-12">
+      {/* Hero Section */}
+      <section className="text-center mb-12 bg-gradient-to-r from-green-100 to-teal-200 rounded-lg p-8 shadow-lg">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="space-y-6"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
+            Openbullet Web Testing Suite
+          </h1>
+          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+            A powerful tool for web scraping, pentesting, and automated testing. Perform requests towards web apps, parse data, and more with Openbullet.
+          </p>
+          <DownloadButton />
+        </motion.div>
+      </section>
 
-    {/* Testimonials Section */}
+      {/* Features Section */}
+      <section>
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Features</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <FeatureCard
+            title="Automated Requests"
+            description="Perform automated requests with ease for web scraping or pentesting."
+            icon={FaSearch}
+          />
+          <FeatureCard
+            title="Unit Testing with Selenium"
+            description="Run unit tests and web automation scripts seamlessly with Selenium support."
+            icon={FaHammer}
+          />
+          <FeatureCard
+            title="Data Parsing"
+            description="Efficiently scrape and parse data from web applications."
+            icon={FaCode}
+          />
+          <FeatureCard
+            title="Security Testing"
+            description="Test your web application's security with a range of pentesting tools."
+            icon={FaLock}
+          />
+          <FeatureCard
+            title="One-Click Sync"
+            description="Sync your data and results across devices with just a click."
+            icon={FaSync}
+          />
+          <FeatureCard
+            title="Customizable Workflows"
+            description="Tailor your testing processes and workflows to suit your needs."
+            icon={FaCogs}
+          />
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
     <section className="bg-gray-50 py-12">
       <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">What Our Users Say</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -168,7 +188,8 @@ const Home = () => (
         </Disclosure>
       </div>
     </section>
-  </div>
+    </div>
+  </>
 );
 
 export default Home;
