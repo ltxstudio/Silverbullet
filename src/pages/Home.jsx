@@ -1,8 +1,9 @@
 import React from 'react';
 import FeatureCard from '../components/FeatureCard';
 import DownloadButton from '../components/DownloadButton';
-import { FaCode, FaCloudDownloadAlt, FaSync, FaUserFriends, FaLock } from 'react-icons/fa';
+import { FaCode, FaCloudDownloadAlt, FaSync, FaUserFriends, FaLock, FaStar, FaCogs } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { Transition } from '@headlessui/react';
 
 const Home = () => (
   <div className="container mx-auto px-6 py-12 space-y-12">
@@ -75,20 +76,46 @@ const Home = () => (
     <section className="py-12">
       <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Pricing</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {/* Free Plan */}
         <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center">
           <h3 className="text-xl font-bold mb-2 text-blue-600">Free Plan</h3>
           <p className="text-gray-700 mb-4">Basic features for individuals and hobbyists.</p>
           <p className="font-bold text-lg">$0/month</p>
+          <div className="mt-4">
+            <ul className="space-y-2 text-left text-gray-700">
+              <li className="flex items-center"><FaCloudDownloadAlt className="mr-2" /> Sync repositories</li>
+              <li className="flex items-center"><FaUserFriends className="mr-2" /> Basic collaboration tools</li>
+              <li className="flex items-center"><FaLock className="mr-2" /> Basic security features</li>
+            </ul>
+          </div>
         </div>
+
+        {/* Pro Plan */}
         <div className="bg-blue-100 p-6 rounded-lg shadow-md text-center">
           <h3 className="text-xl font-bold mb-2 text-blue-600">Pro Plan</h3>
           <p className="text-gray-700 mb-4">Advanced tools and priority support for professionals.</p>
           <p className="font-bold text-lg">$19/month</p>
+          <div className="mt-4">
+            <ul className="space-y-2 text-left text-gray-700">
+              <li className="flex items-center"><FaCloudDownloadAlt className="mr-2" /> One-click syncing</li>
+              <li className="flex items-center"><FaCogs className="mr-2" /> Advanced features</li>
+              <li className="flex items-center"><FaStar className="mr-2" /> Priority support</li>
+            </ul>
+          </div>
         </div>
+
+        {/* Enterprise Plan */}
         <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center">
           <h3 className="text-xl font-bold mb-2 text-blue-600">Enterprise Plan</h3>
           <p className="text-gray-700 mb-4">Custom solutions and dedicated support for teams.</p>
           <p className="font-bold text-lg">Contact us</p>
+          <div className="mt-4">
+            <ul className="space-y-2 text-left text-gray-700">
+              <li className="flex items-center"><FaCloudDownloadAlt className="mr-2" /> Team synchronization</li>
+              <li className="flex items-center"><FaCogs className="mr-2" /> Tailored solutions</li>
+              <li className="flex items-center"><FaLock className="mr-2" /> Enhanced security</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
