@@ -1,14 +1,14 @@
 import React from 'react';
 import FeatureCard from '../components/FeatureCard';
 import DownloadButton from '../components/DownloadButton';
-import { FaCode, FaCloudDownloadAlt, FaSync, FaUserFriends, FaLock, FaStar, FaCogs, FaShoppingCart } from 'react-icons/fa';
+import { FaCode, FaCloudDownloadAlt, FaSync, FaUserFriends, FaLock, FaStar, FaCogs, FaShoppingCart, FaSearch, FaHammer } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { Disclosure } from '@headlessui/react';
 
 const Home = () => (
   <div className="container mx-auto px-6 py-12 space-y-12">
     {/* Hero Section */}
-    <section className="text-center mb-12 bg-gradient-to-r from-blue-100 to-indigo-200 rounded-lg p-8 shadow-lg">
+    <section className="text-center mb-12 bg-gradient-to-r from-green-100 to-teal-200 rounded-lg p-8 shadow-lg">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -16,10 +16,10 @@ const Home = () => (
         className="space-y-6"
       >
         <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
-          Silverbullet GitHub Desktop
+          Openbullet Web Testing Suite
         </h1>
         <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-          Revolutionizing the way you manage repositories. Sync, code, and deploy like never before with Silverbullet's seamless experience.
+          A powerful tool for web scraping, pentesting, and automated testing. Perform requests towards web apps, parse data, and more with Openbullet.
         </p>
         <DownloadButton />
       </motion.div>
@@ -30,19 +30,34 @@ const Home = () => (
       <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Features</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <FeatureCard
-          title="Code Management"
-          description="Effortlessly manage your repositories with a simple interface."
+          title="Automated Requests"
+          description="Perform automated requests with ease for web scraping or pentesting."
+          icon={FaSearch}
+        />
+        <FeatureCard
+          title="Unit Testing with Selenium"
+          description="Run unit tests and web automation scripts seamlessly with Selenium support."
+          icon={FaHammer}
+        />
+        <FeatureCard
+          title="Data Parsing"
+          description="Efficiently scrape and parse data from web applications."
           icon={FaCode}
         />
         <FeatureCard
+          title="Security Testing"
+          description="Test your web application's security with a range of pentesting tools."
+          icon={FaLock}
+        />
+        <FeatureCard
           title="One-Click Sync"
-          description="Sync your work across devices in a click."
+          description="Sync your data and results across devices with just a click."
           icon={FaSync}
         />
         <FeatureCard
-          title="Secure Environment"
-          description="Enjoy secure and reliable coding with built-in encryption."
-          icon={FaLock}
+          title="Customizable Workflows"
+          description="Tailor your testing processes and workflows to suit your needs."
+          icon={FaCogs}
         />
       </div>
     </section>
@@ -56,18 +71,18 @@ const Home = () => (
           className="bg-white p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-in-out"
         >
           <p className="text-gray-700 italic">
-            "Silverbullet made my GitHub workflow 3x faster. Highly recommend it!"
+            "Openbullet has completely changed how I approach web scraping. It's powerful and easy to use."
           </p>
-          <h4 className="mt-4 font-bold text-gray-800">- Jane Doe</h4>
+          <h4 className="mt-4 font-bold text-gray-800">- Alice Johnson</h4>
         </motion.div>
         <motion.div
           whileHover={{ scale: 1.05 }}
           className="bg-white p-6 rounded-lg shadow-lg text-center transition-all duration-300 ease-in-out"
         >
           <p className="text-gray-700 italic">
-            "The perfect desktop tool for developers. Intuitive and powerful."
+            "The best tool for pentesting and automation. I save hours every week thanks to Openbullet."
           </p>
-          <h4 className="mt-4 font-bold text-gray-800">- John Smith</h4>
+          <h4 className="mt-4 font-bold text-gray-800">- Bob Martin</h4>
         </motion.div>
       </div>
     </section>
@@ -83,9 +98,9 @@ const Home = () => (
           <p className="font-bold text-lg">$0/month</p>
           <div className="mt-4">
             <ul className="space-y-2 text-left text-gray-700">
-              <li className="flex items-center"><FaCloudDownloadAlt className="mr-2" /> Sync repositories</li>
-              <li className="flex items-center"><FaUserFriends className="mr-2" /> Basic collaboration tools</li>
-              <li className="flex items-center"><FaLock className="mr-2" /> Basic security features</li>
+              <li className="flex items-center"><FaCloudDownloadAlt className="mr-2" /> Limited automated requests</li>
+              <li className="flex items-center"><FaUserFriends className="mr-2" /> Basic data parsing</li>
+              <li className="flex items-center"><FaLock className="mr-2" /> Limited security tools</li>
             </ul>
           </div>
         </div>
@@ -97,8 +112,8 @@ const Home = () => (
           <p className="font-bold text-lg">$19/month</p>
           <div className="mt-4">
             <ul className="space-y-2 text-left text-gray-700">
-              <li className="flex items-center"><FaCloudDownloadAlt className="mr-2" /> One-click syncing</li>
-              <li className="flex items-center"><FaCogs className="mr-2" /> Advanced features</li>
+              <li className="flex items-center"><FaCloudDownloadAlt className="mr-2" /> Unlimited automated requests</li>
+              <li className="flex items-center"><FaCogs className="mr-2" /> Advanced data parsing</li>
               <li className="flex items-center"><FaStar className="mr-2" /> Priority support</li>
             </ul>
           </div>
@@ -124,13 +139,13 @@ const Home = () => (
           {({ open }) => (
             <>
               <Disclosure.Button className="bg-white p-4 rounded-lg shadow-md w-full text-left text-gray-800 font-bold focus:outline-none">
-                <span>What is Silverbullet?</span>
+                <span>What is Openbullet?</span>
                 <span className={`ml-2 transition-transform ${open ? 'rotate-180' : ''}`}>
                   ▼
                 </span>
               </Disclosure.Button>
               <Disclosure.Panel className="bg-white p-4 rounded-lg shadow-md text-gray-700">
-                Silverbullet is a desktop application that streamlines GitHub repository management. It integrates with your GitHub account to automate syncing and provide a seamless workflow.
+                Openbullet is a web testing suite that automates requests towards web apps for scraping, pentesting, unit testing, and more.
               </Disclosure.Panel>
             </>
           )}
@@ -146,7 +161,7 @@ const Home = () => (
                 </span>
               </Disclosure.Button>
               <Disclosure.Panel className="bg-white p-4 rounded-lg shadow-md text-gray-700">
-                Yes! Silverbullet offers a free plan with basic features. You can also upgrade to the Pro plan for additional features.
+                Yes! Openbullet offers a free plan with basic features. You can also upgrade to the Pro plan for additional tools and capabilities.
               </Disclosure.Panel>
             </>
           )}
